@@ -1,0 +1,194 @@
+// ernestdefoe/flarum-showcase — forum styles
+//
+// Visual reference: ~/Desktop/showcase-mockup/. Uses Flarum's CSS custom
+// properties where available so the section inherits the active theme.
+
+.Showcase {
+  margin: 16px 0 24px;
+}
+
+.Showcase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 0 2px;
+}
+
+.Showcase-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Showcase-title-star { color: #e9b949; }
+
+.Showcase-subtitle {
+  font-size: 12px;
+  color: var(--muted-color);
+  margin: 0;
+}
+
+// Carousel
+.ShowcaseCarousel {
+  position: relative;
+}
+
+.ShowcaseCarousel-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 2px 12px;
+  margin: 0 -2px;
+}
+
+.ShowcaseCarousel-track::-webkit-scrollbar { height: 6px; }
+.ShowcaseCarousel-track::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 999px; }
+.ShowcaseCarousel-track::-webkit-scrollbar-track { background: transparent; }
+
+.ShowcaseCarousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--body-bg);
+  border: 1px solid var(--control-bg);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  font-size: 18px;
+  color: var(--text-color);
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: transform 0.1s, background 0.1s;
+}
+
+.ShowcaseCarousel-nav:hover { transform: translateY(-50%) scale(1.06); }
+.ShowcaseCarousel-nav:active { transform: translateY(-50%) scale(0.94); }
+.ShowcaseCarousel-nav--prev { left: -14px; }
+.ShowcaseCarousel-nav--next { right: -14px; }
+
+// Grid
+.ShowcaseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+// Card (shared by carousel + grid)
+.ShowcaseCard {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--body-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  cursor: pointer;
+}
+
+.ShowcaseGrid .ShowcaseCard { flex: 1 1 auto; }
+
+.ShowcaseCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+.ShowcaseCard-cover {
+  aspect-ratio: 16 / 10;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ShowcaseCard-cover-initial {
+  font-size: 64px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.ShowcaseCard-tags {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: calc(100% - 20px);
+}
+
+.ShowcaseCard-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 999px;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.ShowcaseCard-tag--primary {
+  background: rgba(255,255,255,0.92);
+  color: #222;
+}
+
+.ShowcaseCard-tag--secondary {
+  background: #5b8ff9;
+  color: #fff;
+}
+
+// Hooks for known category slugs — admin can re-color via custom CSS for
+// other slug values.
+.ShowcaseCard-tag--secondary.tag--themes { background: #c39bd3; }
+.ShowcaseCard-tag--secondary.tag--extensions { background: #5b8ff9; }
+
+.ShowcaseCard-body {
+  padding: 14px 14px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ShowcaseCard-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ShowcaseCard-meta {
+  margin-top: auto;
+  font-size: 12px;
+  color: var(--muted-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ShowcaseCard-meta strong { color: var(--text-color); }
+.ShowcaseCard-dot { opacity: 0.5; }

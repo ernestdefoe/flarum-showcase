@@ -1,0 +1,40 @@
+ernestdefoe-showcase:
+  # Strings shown to logged-out forum visitors on the index page.
+  forum:
+    section:
+      title: Showcase
+      subtitle: Featured extensions and themes
+
+  # Reusable bits that aren't tied to a single page — carousel chrome,
+  # fallback labels, etc. fof/linguist will group these under their own
+  # heading in the translation admin.
+  lib:
+    carousel:
+      previous: Previous
+      next: Next
+    card:
+      deleted_author: "—"
+
+  # Settings page in the admin panel. Keys mirror the setting identifiers
+  # in `extend.php` so it's easy to trace.
+  admin:
+    settings:
+      display_style:
+        label: Display style
+        help: How showcase cards are laid out above the discussion list.
+        carousel: Carousel (horizontal scroll)
+        grid: Grid (wraps to multiple rows)
+      primary_tag_ids:
+        label: Qualifying primary tags
+        help: A discussion appears in the showcase only when it carries one of these as its primary tag. On a support site this is typically the per-extension tag (e.g. theme-toggle, gh-readme).
+      secondary_tag_ids:
+        label: Qualifying secondary tags
+        help: A discussion also needs at least one of these as a secondary tag. On a support site this is typically the umbrella category (Extensions, Themes).
+      max_cards:
+        label: Maximum cards
+        help: Hard cap on how many cards render in the showcase section.
+      sort:
+        label: Sort order
+        latest: Latest activity
+        most_replied: Most replied
+        pinned_first: Pinned first, then latest
