@@ -1,6 +1,11 @@
 import Admin from 'flarum/common/extenders/Admin';
 import app from 'flarum/admin/app';
-import SelectTagsSettingComponent from 'flarum/tags/admin/components/SelectTagsSettingComponent';
+// Runtime import must use the `ext:` prefix so flarum-webpack-config
+// externalises it as `flarum.reg.get('flarum-tags', '…')`. A bare
+// `flarum/tags/…` import gets bucketed under namespace `core` and the
+// runtime lookup returns undefined — which crashes the whole settings
+// page on render, leaving the admin Showcase tab empty.
+import SelectTagsSettingComponent from 'ext:flarum/tags/admin/components/SelectTagsSettingComponent';
 import type Tag from 'flarum/tags/common/models/Tag';
 import type ExtensionPage from 'flarum/admin/components/ExtensionPage';
 
