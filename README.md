@@ -1,5 +1,11 @@
 # Flarum Showcase
 
+[![Floxum](https://floxum.com/extension/ernestdefoe/flarum-showcase/badge/name)](https://floxum.com/extension/ernestdefoe/flarum-showcase)
+[![Version](https://floxum.com/extension/ernestdefoe/flarum-showcase/badge/highest-version)](https://floxum.com/extension/ernestdefoe/flarum-showcase)
+[![Downloads](https://floxum.com/extension/ernestdefoe/flarum-showcase/badge/downloads)](https://floxum.com/extension/ernestdefoe/flarum-showcase)
+[![Review](https://floxum.com/extension/ernestdefoe/flarum-showcase/badge/review)](https://floxum.com/extension/ernestdefoe/flarum-showcase)
+[![License](https://floxum.com/extension/ernestdefoe/flarum-showcase/badge/license)](https://floxum.com/extension/ernestdefoe/flarum-showcase)
+
 A tag-driven feature rail for the Flarum 2 forum index. Pick a set of primary tags and a set of secondary tags in the admin panel — any discussion that carries one from each appears as a card above the discussion list, with the cover image pulled from the linked GitHub repository's social-preview when the opening post embeds a [`gh-readme`](https://github.com/ernestdefoe/gh-readme) shortcode.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
