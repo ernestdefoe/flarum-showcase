@@ -41,7 +41,7 @@ class Qualifier
         $hasPrimary = false;
         $hasSecondary = false;
 
-        foreach ($discussion->tags as $tag) {
+        foreach ($discussion->getAttribute('tags') as $tag) {
             $id = (int) $tag->id;
             if ($tag->is_primary) {
                 if (in_array($id, $primary, true)) {
