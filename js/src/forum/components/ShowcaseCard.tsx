@@ -54,14 +54,8 @@ export default class ShowcaseCard extends Component<Attrs> {
             </span>
           )}
           <div className="ShowcaseCard-tags">
-            {secondary && (
-              <span className={`ShowcaseCard-tag ShowcaseCard-tag--secondary tag--${secondarySlug}`}>
-                {secondary.name()}
-              </span>
-            )}
-            {primary && (
-              <span className="ShowcaseCard-tag ShowcaseCard-tag--primary">{primary.name()}</span>
-            )}
+            {secondary && <span className={`ShowcaseCard-tag ShowcaseCard-tag--secondary tag--${secondarySlug}`}>{secondary.name()}</span>}
+            {primary && <span className="ShowcaseCard-tag ShowcaseCard-tag--primary">{primary.name()}</span>}
           </div>
         </div>
         <div className="ShowcaseCard-body">

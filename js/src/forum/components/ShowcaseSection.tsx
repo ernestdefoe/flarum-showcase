@@ -28,11 +28,7 @@ export default class ShowcaseSection extends Component<Attrs> {
           </h2>
           <p className="Showcase-subtitle">{tr('subtitle')}</p>
         </header>
-        {style === 'grid' ? (
-          <ShowcaseGrid discussions={discussions} />
-        ) : (
-          <ShowcaseCarousel discussions={discussions} />
-        )}
+        {style === 'grid' ? <ShowcaseGrid discussions={discussions} /> : <ShowcaseCarousel discussions={discussions} />}
       </section>
     );
   }

@@ -41,9 +41,7 @@ export async function loadShowcase(): Promise<void> {
 
   try {
     const allTags = (await app.store.find<Tag[]>('tags')) ?? [];
-    const secondarySlugs = allTags
-      .filter((t) => secondaryIds.includes(Number(t.id())))
-      .map((t) => String(t.slug()));
+    const secondarySlugs = allTags.filter((t) => secondaryIds.includes(Number(t.id()))).map((t) => String(t.slug()));
 
     if (secondarySlugs.length === 0) {
       state.loaded = true;
@@ -70,9 +68,7 @@ export async function loadShowcase(): Promise<void> {
         const id = d.id();
         if (!id || seen.has(id)) continue;
         const tags = ((d as unknown as { tags?: () => Tag[] }).tags?.() ?? []) as Tag[];
-        const matchesPrimary = tags.some(
-          (t) => t.position() !== null && primarySet.has(Number(t.id()))
-        );
+        const matchesPrimary = tags.some((t) => t.position() !== null && primarySet.has(Number(t.id())));
         if (!matchesPrimary) continue;
         seen.add(id);
         merged.push(d);

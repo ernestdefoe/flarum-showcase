@@ -18,13 +18,7 @@ const t = (key: string) => app.translator.trans(`ernestdefoe-showcase.admin.sett
 // landed by render time — easy for admins to mistake for a working
 // field and type raw IDs into. Calling the component directly removes
 // that failure mode.
-function tagPicker(
-  page: ExtensionPage,
-  settingKey: string,
-  labelKey: string,
-  helpKey: string,
-  isSelectable: (tag: Tag) => boolean
-) {
+function tagPicker(page: ExtensionPage, settingKey: string, labelKey: string, helpKey: string, isSelectable: (tag: Tag) => boolean) {
   return (
     <SelectTagsSettingComponent
       type="flarum-tags.select-tags"
