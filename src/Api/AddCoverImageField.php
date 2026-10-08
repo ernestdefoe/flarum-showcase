@@ -4,8 +4,8 @@ namespace Ernestdefoe\Showcase\Api;
 
 use Ernestdefoe\Showcase\CoverImage\Resolver;
 use Ernestdefoe\Showcase\Showcase\Qualifier;
-use Flarum\Discussion\Discussion;
 use Flarum\Api\Schema;
+use Flarum\Discussion\Discussion;
 use Illuminate\Database\Eloquent\Collection;
 
 class AddCoverImageField

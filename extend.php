@@ -1,18 +1,18 @@
 <?php
 
-use Flarum\Extend;
-use Flarum\Api\Resource\DiscussionResource;
 use Ernestdefoe\Showcase\Api\AddCoverImageField;
+use Flarum\Api\Resource\DiscussionResource;
+use Flarum\Extend;
 
 return [
     (new Extend\Frontend('forum'))
-        ->js(__DIR__ . '/js/dist/forum.js')
-        ->css(__DIR__ . '/less/forum.less'),
+        ->js(__DIR__.'/js/dist/forum.js')
+        ->css(__DIR__.'/less/forum.less'),
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__ . '/js/dist/admin.js'),
+        ->js(__DIR__.'/js/dist/admin.js'),
 
-    new Extend\Locales(__DIR__ . '/locale'),
+    new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\ApiResource(DiscussionResource::class))
         ->fields(AddCoverImageField::class),
@@ -26,10 +26,12 @@ return [
         ->serializeToForum('showcaseDisplayStyle', 'ernestdefoe-showcase.display_style')
         ->serializeToForum('showcasePrimaryTagIds', 'ernestdefoe-showcase.primary_tag_ids', function ($v) {
             $decoded = json_decode((string) ($v ?? '[]'), true);
+
             return is_array($decoded) ? array_values(array_map('intval', $decoded)) : [];
         })
         ->serializeToForum('showcaseSecondaryTagIds', 'ernestdefoe-showcase.secondary_tag_ids', function ($v) {
             $decoded = json_decode((string) ($v ?? '[]'), true);
+
             return is_array($decoded) ? array_values(array_map('intval', $decoded)) : [];
         })
         ->serializeToForum('showcaseMaxCards', 'ernestdefoe-showcase.max_cards', fn ($v) => (int) $v)
