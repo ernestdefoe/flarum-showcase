@@ -14,6 +14,7 @@ ernestdefoe-showcase:
       next: Next
     card:
       deleted_author: "—"
+      replies: "{count, plural, one {# reply} other {# replies}}"
 
   # Settings page in the admin panel. Keys mirror the setting identifiers
   # in `extend.php` so it's easy to trace.

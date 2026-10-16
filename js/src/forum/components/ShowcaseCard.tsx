@@ -30,7 +30,7 @@ export default class ShowcaseCard extends Component<Attrs> {
 
   private replyCount(d: Discussion): string {
     const count = Math.max(0, (d.commentCount() ?? 1) - 1);
-    return String(app.translator.trans('core.forum.discussion_list.replies_text', { count }));
+    return String(app.translator.trans('ernestdefoe-showcase.lib.card.replies', { count }));
   }
 
   view() {
