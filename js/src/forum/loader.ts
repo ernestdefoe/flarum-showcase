@@ -22,9 +22,10 @@ export function showcaseState(): LoaderState {
 
 /**
  * Strategy: there are usually few secondary tags (Extensions / Themes) but
- * many primaries (one per extension). We fire one fetch per *secondary*
- * tag slug, then AND-filter the merged result against the configured
- * primary-tag-ID set client-side.
+ * many primaries (one per extension). We fetch discussions carrying any
+ * *secondary* tag in one request (comma = OR), ordered by the admin's sort
+ * (the forum carries it as the API sort), then AND-filter the result against
+ * the configured primary-tag-ID set client-side, keeping the server's order.
  */
 export async function loadShowcase(): Promise<void> {
   if (state.loading || state.loaded) return;
@@ -48,34 +49,18 @@ export async function loadShowcase(): Promise<void> {
       return;
     }
 
-    const lists = await Promise.all(
-      secondarySlugs.map((slug) =>
-        app.store.find<Discussion[]>('discussions', {
-          filter: { tag: slug },
-          include: 'user,tags,firstPost',
-          page: { limit: max },
-          sort: '-lastPostedAt',
-        })
-      )
-    );
+    const list = await app.store.find<Discussion[]>('discussions', {
+      filter: { tag: secondarySlugs.join(',') },
+      include: 'user,tags,firstPost',
+      page: { limit: max },
+      sort: String(app.forum.attribute('showcaseSort') || '-lastPostedAt'),
+    });
 
     const primarySet = new Set(primaryIds);
-    const seen = new Set<string>();
-    const merged: Discussion[] = [];
-
-    for (const list of lists) {
-      for (const d of list) {
-        const id = d.id();
-        if (!id || seen.has(id)) continue;
-        const tags = ((d as unknown as { tags?: () => Tag[] }).tags?.() ?? []) as Tag[];
-        const matchesPrimary = tags.some((t) => t.position() !== null && primarySet.has(Number(t.id())));
-        if (!matchesPrimary) continue;
-        seen.add(id);
-        merged.push(d);
-        if (merged.length >= max) break;
-      }
-      if (merged.length >= max) break;
-    }
+    const merged = list.filter((d) => {
+      const tags = ((d as unknown as { tags?: () => Tag[] }).tags?.() ?? []) as Tag[];
+      return tags.some((t) => t.position() !== null && primarySet.has(Number(t.id())));
+    });
 
     state.discussions = merged;
     state.loaded = true;
