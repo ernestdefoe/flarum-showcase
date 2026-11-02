@@ -25,25 +25,6 @@ function tagsOf(d: Discussion): Tag[] {
   return ((d as unknown as { tags?: () => Tag[] | undefined }).tags?.() ?? []) as Tag[];
 }
 
-export function isShowcaseDiscussion(discussion: Discussion): boolean {
-  const primary = qualifyingPrimaryTagIds();
-  const secondary = qualifyingSecondaryTagIds();
-  if (primary.length === 0 || secondary.length === 0) return false;
-
-  let hasPrimary = false;
-  let hasSecondary = false;
-  for (const tag of tagsOf(discussion)) {
-    const id = Number(tag.id());
-    if (tag.position() !== null) {
-      if (primary.includes(id)) hasPrimary = true;
-    } else {
-      if (secondary.includes(id)) hasSecondary = true;
-    }
-    if (hasPrimary && hasSecondary) return true;
-  }
-  return false;
-}
-
 /** Used by ShowcaseCard to render the two chip labels. */
 export function splitTags(discussion: Discussion): { primary: Tag | null; secondary: Tag | null } {
   const primaryIds = qualifyingPrimaryTagIds();

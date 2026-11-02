@@ -67,6 +67,18 @@ class ShowcaseTest extends TestCase
     }
 
     #[Test]
+    public function the_forum_payload_already_carries_the_secondary_tags_the_loader_needs()
+    {
+        // The forum JS reads the secondary tags' slugs from the store and only
+        // fetches /api/tags when one is missing: flarum/tags must keep sending them.
+        $response = $this->send($this->request('GET', '/api'));
+        $included = json_decode((string) $response->getBody(), true)['included'] ?? [];
+        $slugs = array_column(array_map(fn ($r) => ['id' => $r['id'], 'slug' => $r['attributes']['slug'] ?? null], array_filter($included, fn ($r) => $r['type'] === 'tags')), 'slug', 'id');
+
+        $this->assertSame('released', $slugs['3'] ?? null);
+    }
+
+    #[Test]
     public function an_empty_whitelist_showcases_nothing()
     {
         $this->setting('ernestdefoe-showcase.secondary_tag_ids', '[]');

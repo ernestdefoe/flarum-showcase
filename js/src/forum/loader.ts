@@ -41,8 +41,15 @@ export async function loadShowcase(): Promise<void> {
   const max = Number(app.forum.attribute('showcaseMaxCards') ?? 12);
 
   try {
-    const allTags = (await app.store.find<Tag[]>('tags')) ?? [];
-    const secondarySlugs = allTags.filter((t) => secondaryIds.includes(Number(t.id()))).map((t) => String(t.slug()));
+    // flarum/tags preloads the forum's top secondary tags into the store with
+    // the forum payload, so the Extensions/Themes tags are usually already
+    // there: only ask the API for the tag list when one is missing.
+    let tags = secondaryIds.map((id) => app.store.getById<Tag>('tags', String(id)));
+    if (tags.some((t) => !t)) {
+      const allTags = (await app.store.find<Tag[]>('tags')) ?? [];
+      tags = allTags.filter((t) => secondaryIds.includes(Number(t.id())));
+    }
+    const secondarySlugs = tags.filter((t): t is Tag => !!t).map((t) => String(t.slug()));
 
     if (secondarySlugs.length === 0) {
       state.loaded = true;
